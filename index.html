@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="Scripts/jQuery/jquery-1.11.0.min.js"></script>
+    <script src="Scripts/css3-mediaqueries/css3-mediaqueries.js"></script>
+
+    <script src="Scripts/CryptoJS/components/core-min.js"></script>
+    <script src="Scripts/CryptoJS/components/enc-base64-min.js"></script>
+    <script src="Scripts/CryptoJS/rollups/sha256.js"></script>
+
+    <!-- hint: there is also a C# version (PasswordLive.cs) available under this location: -->
+    <script src="Scripts/PasswordLive/PasswordLive.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var PasswordForm = $("#form0");
+
+            var keywordField = $("#SecretKeyword");
+            var whatForField = $("#WhatFor");
+            var lengthField = $("#Length");
+            var UpperCaseButton = $("#UpperCase");
+            var LowerCaseButton = $("#LowerCase");
+            var NumbersButton = $("#Numbers");
+            var SpecialCharactersButton = $("#SpecialCharacters");
+            var GenerateButton = $("#GenerateButton");
+            var ResultField = $("#Result");
+
+            var keywordString = "";
+            var whatForString = "";
+            var length = 15;
+            var MakeUpperCase = false;
+            var MakeLowerCase = false;
+            var MakeNumbers = false;
+            var MakeSpecialCharacters = false;
+
+            PasswordForm.submit(function(e){
+                e.preventDefault();
+
+                keywordString = keywordField.val();
+                whatForString = whatForField.val();
+                length = +(lengthField.val());
+                MakeUpperCase = UpperCaseButton.is(":checked");
+                MakeLowerCase = LowerCaseButton.is(":checked");
+                MakeNumbers = NumbersButton.is(":checked");
+                MakeSpecialCharacters = SpecialCharactersButton.is(":checked");
+                ResultField.val(PasswordLive.Compute(keywordString, whatForString, length, MakeUpperCase, MakeLowerCase, MakeNumbers, MakeSpecialCharacters));
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+    <div id="container2">
+    <section>
+        <div>
+        <form id="form0" action="" method="get" autocomplete="off">
+                <p class="generator-p">
+                    <span class="generator-block">
+                    
+                    <input autofocus="autofocus" id="SecretKeyword" name="SecretKeyword" tabindex="1" type="text" autocomplete="off" required/>
+                    </span>
+                    
+                    <span class="clearboth"></span>
+                </p>
+                <p class="generator-p">
+                    <span class="generator-block">
+                    
+                    <input id="WhatFor" name="WhatFor" tabindex="2" type="text" autocomplete="off" required/><br />
+                    </span>
+                                        <span class="clearboth"></span>
+                </p>
+                <p class="generator-p">
+                    <span class="generator-block">
+                        
+                        <input id="Length" name="Length" tabindex="3" type="number" value="10" min="8" max="64" required/>  <br />
+<br />
+                        <span class="checkboxes">
+                        <input checked="checked" data-val="true" data-val-required="The UpperCase field is required." id="UpperCase" name="UpperCase" type="checkbox" value="true" /><input name="UpperCase" type="hidden" value="false" /> 
+                        <input checked="checked" data-val="true" data-val-required="The LowerCase field is required." id="LowerCase" name="LowerCase" type="checkbox" value="true" /><input name="LowerCase" type="hidden" value="false" /> 
+                        <input checked="checked" data-val="true" data-val-required="The Numbers field is required." id="Numbers" name="Numbers" type="checkbox" value="true" /><input name="Numbers" type="hidden" value="false" /> 
+                        <input checked="checked" data-val="true" data-val-required="The SpecialCharacters field is required." id="SpecialCharacters" name="SpecialCharacters" type="checkbox" value="true" /><input name="SpecialCharacters" type="hidden" value="false" /> 
+                        </span>
+                    </span>
+                    
+                    <span class="clearboth"></span>
+                </p>
+                                <p class="generator-p">
+                    <span class="generator-block">
+                     
+                        <input id="Result" name="Result" type="text" tabindex="5" value="" autocomplete="off"/>
+                    </span>
+
+                    <span class="clearboth"></span>
+                </p>
+				<p class="generate-button-area generator-p">
+                    <span class="generator-block">
+                        <input type="submit" id="GenerateButton" value="OK" class="button" tabindex="4"  />
+                    </span>
+
+                    <span class="clearboth"></span>
+                </p>
+
+        </form>
+        </div>
+    </section>
+
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
